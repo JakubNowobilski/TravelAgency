@@ -11,6 +11,33 @@ const client = new MongoClient(C.mongoConnectionString,  {
     }
 );
 
+async function getAllTrips() {
+    try {
+        const db = await client.db(C.mongoDbName)
+        const trips = await db.collection(C.tripsCollection).find({}).toArray();
+        console.log('Fetched all trips.');
+        return trips
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+async function getTripById(id) {
+    try {
+        const db = await client.db(C.mongoDbName)
+        const trip = await db.collection(C.tripsCollection).findOne({id: id})
+        if (trip !== null) {
+            console.log(`Fetched trip by id: ${id}`);
+            return trip
+        } else {
+            console.log(`Could not find trip by id: ${id}`);
+            return undefined
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
 async function dropUpdateDb() {
     try {
         const db = await client.db(C.mongoDbName)
@@ -52,5 +79,7 @@ process.on('SIGINT', function() {
 module.exports = {
     connectDb: connectDb,
     closeConnection: closeConnection,
-    dropUpdateDb: dropUpdateDb
+    dropUpdateDb: dropUpdateDb,
+    getAllTrips: getAllTrips,
+    getTripById: getTripById
 }
