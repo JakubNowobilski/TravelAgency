@@ -2,6 +2,7 @@
 // const fetchCoords = require("./geocoding_client.js")
 // const fetchCurrentWeather = require("./current_weather.js")
 // const fetchHourlyWeather = require("./hourly_weather.js")
+const db = require("./db_service")
 const fs = require("fs");
 const express = require("express");
 const cors = require("cors");
@@ -92,7 +93,9 @@ app.get("/*", ((req, res) => {
 }))
 
 app.listen(port, () => {
-    console.log("App server listening at http://localhost:" + port);
+    db.connectDb().then(() => {
+        console.log("App server listening at http://localhost:" + port);
+    })
 })
 
 function printReqSummary(req) {
