@@ -1,0 +1,11 @@
+<div class="ratingWrapper">
+  <div class="star" *ngFor="let point of rating, index as idx" (click)="onPointClicked(idx)">
+    <div *ngIf="point then filledStar else emptyStar"></div>
+    <ng-template #filledStar>
+      <img class="filledStar" src="../../../assets/filledStar.svg" alt="Star icon">
+    </ng-template>
+    <ng-template #emptyStar>
+      <img class="emptyStar" src="../../../assets/emptyStar.svg" alt="Star icon">
+    </ng-template>
+  </div>
+</div>

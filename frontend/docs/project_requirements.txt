@@ -1,0 +1,33 @@
+* Trips listing as welcome page
+* Each trip has following fields:
+  * Trip name
+  * Country of destination
+  * Start date
+  * End date
+  * Base price
+  * Maximal number of places
+  * Description
+  * Image URL
+* At least 8 trips
+* Buttons for adding and removing reserved places
+* When number of available places is 0, show an indicator and hide button for adding places
+* When no places are reserved, hide button for removing places
+* Indicator for trips with low number of available places (less than 4)
+* Indicators for the most and the least expensive trips
+* Display chosen currency symbol
+* Show total number of reserved places with different backgrounds depending on the number
+* Removing trips with authorisation
+* Adding trips with authorisation
+* Rating trips with authorisation available only on trip detail view
+* Basket with list of reserved trips and number of reserved places
+* Trips data provided by Firebase Realtime Database
+* App contains following views:
+  * Trips listing page (main page)
+  * Trip details page
+  * Adding new trip page
+  * Basket page
+* Routing
+* Security guards for relevant pages
+* Authentication with Firebase Authentication
+* Authorisation with Firebase Realtime Database with following roles: Guest, Reader, Worker, Admin
+* Option of setting authentication persistence mode

@@ -1,0 +1,7 @@
+<div class="placesCounter" [ngStyle]="{'background-color': tripsService.getTotalPlacesBooked() > 10 ? 'lightgreen' : 'lightpink'}">
+  <p>Total places booked:</p>
+  <h2>{{tripsService.getTotalPlacesBooked()}}</h2>
+</div>
+<div class="tripsListWrapper">
+  <app-trip *ngFor="let trip of tripsService.getTripsList(), first as first, last as last" [trip]="trip" [isFirst]=first [isLast]="last"></app-trip>
+</div>

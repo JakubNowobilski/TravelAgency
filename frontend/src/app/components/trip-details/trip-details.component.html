@@ -1,0 +1,45 @@
+<div class="backButton" routerLink="/trips-listing">Back to Trips list</div>
+<div class="tripWrapper" *ngIf="usersService.getUserRole() !== ''">
+  <app-rating class="rating"></app-rating>
+  <h2 class="name">{{getTrip().name | uppercase}}</h2>
+  <h3 class="price">Price: {{getTrip().price | currency: 'USD': 'symbol': '0.0-1'}}</h3>
+  <p class="date">Date: {{getTrip().dateStart.getDate() | number: '2.0-0'}}.{{getTrip().dateStart.getMonth() | number: '2.0-0'}}.{{getTrip().dateStart.getFullYear()}} - {{getTrip().dateEnd.getDate() | number: '2.0-0'}}.{{getTrip().dateEnd.getMonth() | number: '2.0-0'}}.{{getTrip().dateEnd.getFullYear()}}</p>
+  <p class="country">Country: {{getTrip().country | uppercase}}</p>
+  <hr class="horLine">
+  <div class="preview">
+    <img class="previewImage" [src]=getTrip().imgURL alt="Preview image">
+    <h4>Description:</h4>
+    <p class="description">{{getTrip().description}}</p>
+  </div>
+  <hr class="horLine">
+  <div [ngClass]="{'availablePlaces': getTrip().maxPlaces - getTrip().bookedPlaces >= 4, 'lastPlaces': getTrip().maxPlaces - getTrip().bookedPlaces < 4}">
+    <div *ngIf="getTrip().bookedPlaces === getTrip().maxPlaces then notAvailable else available"></div>
+    <ng-template #available>
+      <p>Available places: {{getTrip().maxPlaces - getTrip().bookedPlaces}}</p>
+      <p class="prompt" *ngIf="getTrip().maxPlaces - getTrip().bookedPlaces < 4">Hurry up! Last places left!</p>
+    </ng-template>
+    <ng-template #notAvailable>
+      <p class="notAvailable">No available places!</p>
+    </ng-template>
+  </div>
+  <div class="booking">
+    <p class="bookedPlaces">Booked places: {{getTrip().bookedPlaces}} / {{getTrip().maxPlaces}}</p>
+    <div class="buttonsWrapper">
+      <div *ngIf="getTrip().bookedPlaces != 0" class="dropPlace" (click)="dropPlaceClicked()">-</div>
+      <div *ngIf="getTrip().bookedPlaces != getTrip().maxPlaces" class="bookPlace" (click)="bookPlaceClicked()">+</div>
+    </div>
+  </div>
+  <img src="../../../assets/dustbin.svg" class="dustbin" alt="Dustbin icon" (click)="removeTripClicked()" *ngIf="usersService.getUserRole() === 'admin'">
+</div>
+<div class="tripWrapper" *ngIf="usersService.getUserRole() === ''">
+  <h2 class="name">{{getTrip().name | uppercase}}</h2>
+  <h3 class="price">Price: {{getTrip().price | currency: 'USD': 'symbol': '0.0-1'}}</h3>
+  <p class="date">Date: {{getTrip().dateStart.getDate() | number: '2.0-0'}}.{{getTrip().dateStart.getMonth() | number: '2.0-0'}}.{{getTrip().dateStart.getFullYear()}} - {{getTrip().dateEnd.getDate() | number: '2.0-0'}}.{{getTrip().dateEnd.getMonth() | number: '2.0-0'}}.{{getTrip().dateEnd.getFullYear()}}</p>
+  <p class="country">Country: {{getTrip().country | uppercase}}</p>
+  <hr class="horLine">
+  <div class="preview">
+    <img class="previewImage" [src]=getTrip().imgURL alt="Preview image">
+    <h4>Description:</h4>
+    <p class="description" style="margin: 10px 35px 15px 35px;">{{getTrip().description}}</p>
+  </div>
+</div>

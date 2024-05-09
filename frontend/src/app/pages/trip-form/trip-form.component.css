@@ -1,0 +1,87 @@
+.formContainer{
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  box-shadow: 0 0 8px 1px #B2B2B2;
+  border-radius: 9px;
+  margin: 0 0 40px 0;
+}
+
+.formElem {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 15px 0 15px;
+}
+
+.formLabel {
+  font-weight: bold;
+  margin: 0 0 5px 0;
+}
+
+.formInput{
+  height: 35px;
+  border: 1px solid dimgrey;
+  border-radius: 5px;
+  color: black;
+  background-color: white;
+  padding: 0 10px;
+  margin: 0;
+  box-shadow: 0 0 2px 1px #B2B2B2;
+}
+
+.submitButton{
+  text-align: center;
+  border-radius: 6px;
+  background-color: darkslategrey;
+  margin: 40px 15px 15px 15px;
+  width: 100px;
+  height: 40px;
+  border: none;
+  color: white;
+  font-weight: bold;
+}
+
+.submitButtonDisabled{
+  opacity: 0.5;
+}
+
+.submitButtonEnabled{
+  opacity: 1;
+}
+
+.submitButtonEnabled:hover {
+  cursor: pointer;
+}
+
+input.ng-invalid.ng-touched{
+  border-left: 5px solid darkred;
+  padding: 0 6px;
+}
+
+input.ng-valid.ng-touched{
+  border-left: 5px solid darkgreen;
+  padding: 0 6px;
+}
+
+input:focus{
+  background-color: whitesmoke;
+}
+
+.formTitle {
+  font-weight: bold;
+  font-size: 2em;
+  text-align: center;
+  margin: 15px 0 0 0;
+  padding: 0;
+}
+
+.horLine {
+  box-sizing: content-box;
+  align-self: center;
+  border: none;
+  background-color: darkslategrey;
+  height: 1px;
+  width: calc(100% - 30px);
+  margin: 15px 0 0 0;
+  padding: 0;
+}

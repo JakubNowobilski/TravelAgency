@@ -1,0 +1,49 @@
+<div class="tripWrapper" [ngClass]="{'first': (isFirst && !isLast), 'last': (isLast && !isFirst)}" *ngIf="usersService.getUserRole() !== ''">
+  <h3 class="name" [routerLink]="['/trips-listing', tripIdx]">{{trip.name | uppercase}}</h3>
+  <h3 class="price">{{trip.price | currency: 'USD': 'symbol': '0.0-1'}}</h3>
+  <p class="date">{{trip.dateStart.getDate() | number: '2.0-0'}}.{{trip.dateStart.getMonth() | number: '2.0-0'}}.{{trip.dateStart.getFullYear()}} - {{trip.dateEnd.getDate() | number: '2.0-0'}}.{{trip.dateEnd.getMonth() | number: '2.0-0'}}.{{trip.dateEnd.getFullYear()}}</p>
+  <p class="country">{{trip.country | uppercase}}</p>
+  <hr class="horLine">
+  <div class="preview">
+    <img class="previewImage" [src]=trip.imgURL alt="Preview image">
+    <p class="description">{{trip.description}}</p>
+  </div>
+  <hr class="horLine">
+  <div [ngClass]="{'availablePlaces': trip.maxPlaces - trip.bookedPlaces >= 4, 'lastPlaces': trip.maxPlaces - trip.bookedPlaces < 4}">
+    <div *ngIf="trip.bookedPlaces === trip.maxPlaces then notAvailable else available"></div>
+    <ng-template #available>
+      <p>Available places: {{trip.maxPlaces - trip.bookedPlaces}}</p>
+      <p class="prompt" *ngIf="trip.maxPlaces - trip.bookedPlaces < 4">Hurry up! Last places left!</p>
+    </ng-template>
+    <ng-template #notAvailable>
+      <p class="notAvailable">No available places!</p>
+    </ng-template>
+  </div>
+  <div class="booking">
+    <p class="bookedPlaces">Booked places: {{trip.bookedPlaces}} / {{trip.maxPlaces}}</p>
+    <div class="buttonsWrapper">
+      <div *ngIf="trip.bookedPlaces != 0" class="dropPlace" (click)="dropPlaceClicked()">-</div>
+      <div *ngIf="trip.bookedPlaces != trip.maxPlaces" class="bookPlace" (click)="bookPlaceClicked()">+</div>
+    </div>
+  </div>
+  <div class="details" [routerLink]="['/trips-listing', tripIdx]">
+    Details
+  </div>
+</div>
+
+<div class="tripWrapper" [ngClass]="{'first': (isFirst && !isLast), 'last': (isLast && !isFirst)}" *ngIf="usersService.getUserRole() === ''">
+  <h3 class="name" [routerLink]="['/trips-listing', tripIdx]">{{trip.name | uppercase}}</h3>
+  <h3 class="price">{{trip.price | currency: 'USD': 'symbol': '0.0-1'}}</h3>
+  <p class="date">{{trip.dateStart.getDate() | number: '2.0-0'}}.{{trip.dateStart.getMonth() | number: '2.0-0'}}.{{trip.dateStart.getFullYear()}} - {{trip.dateEnd.getDate() | number: '2.0-0'}}.{{trip.dateEnd.getMonth() | number: '2.0-0'}}.{{trip.dateEnd.getFullYear()}}</p>
+  <p class="country">{{trip.country | uppercase}}</p>
+  <hr class="horLine">
+  <div class="preview">
+    <img class="previewImage" [src]=trip.imgURL alt="Preview image">
+    <p class="description">{{trip.description}}</p>
+  </div>
+  <hr class="horLine">
+  <div class="details" [routerLink]="['/trips-listing', tripIdx]">
+    Details
+  </div>
+</div>
+

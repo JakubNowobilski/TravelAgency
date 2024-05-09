@@ -1,0 +1,27 @@
+<div class="formWrapper">
+  <form class="formContainer" [formGroup]="signUpForm" (ngSubmit)="signUp()">
+    <h2 class="formTitle">Sign Up</h2>
+    <div class="formElem">
+      <label class="formLabel" for="email">Email</label>
+      <input type="text" id="email" class="formInput" name="email" formControlName="email" placeholder="Your mail">
+    </div>
+    <div class="formElem">
+      <label class="formLabel" for="password" style="display: inline">
+        Password
+        <p style="display: inline; font-size: 0.8em;  font-weight: normal">(at least 6 characters)</p>
+      </label>
+      <input type="password" id="password" class="formInput" name="password" formControlName="password" placeholder="Your password">
+    </div>
+    <div *ngIf="errorCode === 'auth/email-already-in-use' || errorCode === 'auth/wrong-password'">
+      <p class="error">Email already in use. Use different one</p>
+    </div>
+    <div *ngIf="errorCode === 'auth/invalid-email'">
+      <p class="error">Invalid email</p>
+    </div>
+    <div *ngIf="errorCode === 'auth/weak-password'">
+      <p class="error">Password is too weak</p>
+    </div>
+
+    <button type="submit" class="submitButton" [disabled]="!signUpForm.valid" [ngClass]="{submitButtonEnabled: signUpForm.valid, submitButtonDisabled: !signUpForm.valid}">Sign Up</button>
+  </form>
+</div>

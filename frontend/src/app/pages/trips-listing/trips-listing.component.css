@@ -1,0 +1,30 @@
+.tripsListWrapper{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 30px 0 40px 0;
+  padding: 15px;
+  background-color: white;
+  box-shadow: 0 0 8px 1px #B2B2B2;
+  border-radius: 9px;
+}
+
+.placesCounter{
+  margin: 0;
+  padding: 15px;
+  background-color: white;
+  box-shadow: 0 0 8px 1px #B2B2B2;
+  border-radius: 9px;
+}
+
+.placesCounter p{
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+}
+
+.placesCounter h2{
+  margin: 15px 0 0 0;
+  padding: 0;
+}

@@ -1,0 +1,17 @@
+<div class="basketWrapper">
+  <h2 class="basketTitle">Your Basket</h2>
+  <h3 class="totalPrice">Total price: {{basketService.getTotalPrice()}}$</h3>
+  <hr class="horLine">
+  <div *ngIf="basketService.getProductsList().length === 0 then empty else nonEmpty"></div>
+  <ng-template #empty>
+    <p class="emptyNotification">Your basket is empty</p>
+  </ng-template>
+  <ng-template #nonEmpty>
+    <div class="tripSummary" *ngFor="let product of basketService.getProductsList() last as last" [ngStyle]="{'borderBottom': (last? '1px solid darkslategrey' : 'none')}">
+      <img class="thumbnail" [src]=product.trip.imgURL [alt]=product.trip.name>
+      <p>{{product.trip.name}} ({{product.trip.price}}$)</p>
+      <p>{{product.quantity}} places</p>
+      <p>{{basketService.getProductPrice(product.trip)}}$</p>
+    </div>
+  </ng-template>
+</div>

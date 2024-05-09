@@ -1,0 +1,153 @@
+.bookPlace, .dropPlace, .backButton {
+  background-color: #2f4f4f;
+  color: white;
+  font-weight: bold;
+  width: 60px;
+  margin: 0 0 0 10px;
+  padding: 10px 0;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.backButton {
+  width: 200px;
+}
+
+.bookPlace:hover, .dropPlace:hover, .backButton:hover{
+  cursor: pointer;
+}
+
+.dropPlace {
+  grid-column: 1;
+}
+
+.bookPlace {
+  grid-column: 2;
+}
+
+.tripWrapper {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  margin: 30px 10px 10px 10px;
+  padding: 0;
+  width: auto;
+  border-radius: 9px;
+  box-shadow: 0 0 8px 1px #B2B2B2;
+  background-color: white;
+}
+
+p, h2, h3, h4 {
+  margin: 0 35px;
+  padding: 0;
+}
+
+.name {
+  font-weight: bold;
+  /*color: darkslategrey;*/
+  margin: 10px 0 0 0;
+  align-self: center;
+}
+
+.price {
+  font-weight: bold;
+  margin: 20px 35px 0 35px;
+}
+
+.date {
+  margin: 20px 35px 0 35px;
+}
+
+.country {
+  margin: 10px 35px 0 35px;
+}
+
+.horLine {
+  border: none;
+  background: black;
+  height: 1px;
+  width: 90%;
+  margin: 10px 0 0 0;
+  padding: 0;
+  align-self: center;
+}
+
+.preview {
+  display: initial;
+  width: auto;
+  height: auto;
+  overflow: hidden;
+  margin: 10px 0 0 0;
+}
+
+.previewImage {
+  clip-path: circle(45%);
+  height: 150px;
+  width: 150px;
+  margin: 0 30px 0 30px;
+}
+
+.description {
+  text-align: justify;
+  margin: 5px 35px 0 35px;
+}
+
+.availablePlaces, .lastPlaces {
+  margin: 10px 0 0 0;
+  padding: 5px 0 0 0;
+  text-align: center;
+  height: 40px;
+  width: 100%;
+}
+
+.lastPlaces {
+  background-color: lightblue;
+}
+
+.availablePlaces .prompt{
+  visibility: hidden;
+}
+
+.lastPlaces .prompt{
+  font-size: 0.8em;
+  color: darkred;
+}
+
+.notAvailable {
+  color: darkred;
+}
+
+.booking {
+  margin: 10px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.buttonsWrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 0 35px;
+}
+
+.dustbin {
+  background-color: darkred;
+  padding: 10px 0;
+  margin: 20px 0 0 0;
+  width: 100%;
+  height: 20px;
+  border-bottom-left-radius: 9px;
+  border-bottom-right-radius: 9px;
+}
+
+.dustbin:hover {
+  cursor: pointer;
+}
+
+.rating {
+  width: 100%;
+}
+

@@ -1,0 +1,88 @@
+.account{
+  position: absolute;
+  transform: translate(-15px, 60px);
+  background-color: white;
+  box-shadow: 0 0 8px 1px #B2B2B2;
+  border-radius: 5px;
+}
+
+.hint {
+  color: lightskyblue;
+  font-size: 0.7em;
+  margin: 0;
+  padding: 0;
+}
+
+.accountOptions{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.button{
+  background-color: #2f4f4f;
+  color: white;
+  font-weight: bold;
+  width: 80px;
+  margin: 10px;
+  padding: 10px 0;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.register{
+  margin: 0 10px 10px 10px;
+  padding: 0;
+}
+
+.title, .email {
+  color: black;
+  font-weight: normal;
+  margin: 10px 10px 0 10px;
+  padding: 0;
+}
+
+.email{
+  font-size: 0.8em;
+}
+
+.prompt, .signUp {
+  color: black;
+  font-weight: normal;
+  font-size: 0.8em;
+  margin: 0;
+  padding: 0;
+}
+
+.signUp{
+  font-weight: bold;
+  color: darkslategrey;
+}
+
+.navigationWrapper {
+  margin: 0 0 30px 0;
+  padding: 0;
+  background-color: white;
+  box-shadow: 0 0 8px 1px #B2B2B2;
+  font-weight: bold;
+  color: darkslategrey;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.navButton {
+  padding: 5px;
+  margin: 20px 40px 20px 0;
+  text-decoration: none;
+  color: inherit;
+}
+
+.navButton:hover, .signUp:hover, .button:hover {
+  cursor: pointer;
+}
+
+.active {
+  text-decoration: underline;
+}

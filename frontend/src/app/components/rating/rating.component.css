@@ -1,0 +1,22 @@
+.ratingWrapper{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  background-color: lightblue;
+  border-top-left-radius: 9px;
+  border-top-right-radius: 9px;
+  padding: 12px;
+}
+
+.emptyStar, .filledStar{
+  width: 25px;
+  height: auto;
+  margin: 0 0 0 2px;
+}
+
+.emptyStar:hover, .filledStar:hover{
+  cursor: pointer;
+}
+
+

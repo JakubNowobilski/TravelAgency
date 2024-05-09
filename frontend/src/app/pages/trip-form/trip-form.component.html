@@ -1,0 +1,38 @@
+<form class="formContainer" [formGroup]="tripForm" (ngSubmit)="postTripData()">
+  <div class="formTitle">Add a new trip!</div>
+  <hr class="horLine">
+  <div class="formElem">
+    <label class="formLabel" for="name">Name</label>
+    <input type="text" id="name" class="formInput" name="name" formControlName="name" placeholder="Trip name">
+  </div>
+  <div class="formElem">
+    <label class="formLabel" for="country">Country</label>
+    <input type="text" id="country" class="formInput" name="country" formControlName="country" placeholder="Trip destination country">
+  </div>
+  <div class="formElem">
+    <label class="formLabel" for="dateStart">Start date</label>
+    <input type="date" id="dateStart" class="formInput" name="dateStart" formControlName="dateStart" placeholder="Trip start date">
+  </div>
+  <div class="formElem">
+    <label class="formLabel" for="dateEnd">End date</label>
+    <input type="date" id="dateEnd" class="formInput" name="dateEnd" formControlName="dateEnd" placeholder="Trip end date">
+  </div>
+  <div class="formElem">
+    <label class="formLabel" for="price">Price ($)</label>
+    <input type="text" id="price" class="formInput" name="price" formControlName="price" placeholder="Trip price ($)">
+  </div>
+  <div class="formElem">
+    <label class="formLabel" for="maxPlaces">Max places</label>
+    <input type="text" id="maxPlaces" class="formInput" name="maxPlaces" formControlName="maxPlaces" placeholder="Max number of places">
+  </div>
+  <div class="formElem">
+    <label class="formLabel" for="description">Description</label>
+    <input type="text" id="description" class="formInput" name="description" formControlName="description" placeholder="Trip description">
+  </div>
+  <div class="formElem">
+    <label class="formLabel" for="imgURL">Image URL</label>
+    <input type="text" id="imgURL" class="formInput" name="imgURL" formControlName="imgURL" placeholder="Image URL">
+  </div>
+
+  <button type="submit" class="submitButton" [disabled]="!tripForm.valid" [ngClass]="{submitButtonEnabled: tripForm.valid, submitButtonDisabled: !tripForm.valid}">Add trip</button>
+</form>

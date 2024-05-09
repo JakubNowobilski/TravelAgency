@@ -1,0 +1,10 @@
+<div class="configurationWrapper">
+  <h3>Set persistence mode</h3>
+  <div>
+    <button class="button" [disabled]="persistenceMode === 'local'" [ngClass]="{buttonEnabled: persistenceMode !== 'local', buttonDisabled: persistenceMode === 'local'}" (click)="setPersistence('local')">LOCAL</button>
+    <button class="button" [disabled]="persistenceMode === 'session'" [ngClass]="{buttonEnabled: persistenceMode !== 'session', buttonDisabled: persistenceMode === 'session'}" (click)="setPersistence('session')">SESSION</button>
+    <button class="button" [disabled]="persistenceMode === 'none'" [ngClass]="{buttonEnabled: persistenceMode !== 'none', buttonDisabled: persistenceMode === 'none'}" (click)="setPersistence('none')">NONE</button>
+  </div>
+</div>
+
+

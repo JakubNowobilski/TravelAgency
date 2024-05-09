@@ -1,0 +1,128 @@
+.formWrapper{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.formContainer{
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  width: 50%;
+  box-shadow: 0 0 8px 1px #B2B2B2;
+  border-radius: 9px;
+  margin: 0 0 40px 0;
+}
+
+@media (max-width: 1000px){
+  .formContainer{
+    width: 350px;
+  }
+}
+
+.formElem {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 15px 0 15px;
+}
+
+.formLabel {
+  font-weight: bold;
+  margin: 0 0 5px 0;
+}
+
+.formInput{
+  height: 35px;
+  border: 1px solid dimgrey;
+  border-radius: 5px;
+  color: black;
+  background-color: white;
+  padding: 0 10px;
+  margin: 0;
+  box-shadow: 0 0 2px 1px #B2B2B2;
+}
+
+.submitButton{
+  text-align: center;
+  border-radius: 6px;
+  background-color: darkslategrey;
+  margin: 10px 15px 15px 15px;
+  width: 100px;
+  height: 40px;
+  border: none;
+  color: white;
+  font-weight: bold;
+}
+
+.submitButtonDisabled{
+  opacity: 0.5;
+}
+
+.submitButtonEnabled{
+  opacity: 1;
+}
+
+.submitButtonEnabled:hover {
+  cursor: pointer;
+}
+
+input.ng-invalid.ng-touched{
+  border-left: 5px solid darkred;
+  padding: 0 6px;
+}
+
+input.ng-valid.ng-touched{
+  border-left: 5px solid darkgreen;
+  padding: 0 6px;
+}
+
+input:focus{
+  background-color: whitesmoke;
+}
+
+.formTitle {
+  font-weight: bold;
+  font-size: 2em;
+  text-align: center;
+  margin: 15px 0 0 0;
+  padding: 0;
+}
+
+.horLine {
+  box-sizing: content-box;
+  align-self: center;
+  border: none;
+  background-color: darkslategrey;
+  height: 1px;
+  width: calc(100% - 30px);
+  margin: 0 0 10px 0;
+  padding: 0;
+}
+
+.prompt, .signUp{
+  color: black;
+  font-weight: normal;
+  font-size: 0.8em;
+  margin: 0 15px;
+  padding: 0;
+}
+
+.signUp{
+  font-weight: bold;
+  color: darkslategrey;
+  margin: 0 15px 15px 15px;
+  width: 100px;
+}
+
+.error{
+  color: red;
+  font-weight: normal;
+  font-size: 0.8em;
+  margin: 10px 15px 10px 15px;
+  padding: 0;
+}
+
+.signUp:hover{
+  cursor: pointer;
+}
+

@@ -1,0 +1,24 @@
+<div class="navigationWrapper">
+  <a class="navButton" routerLink="/trips-listing" routerLinkActive="active">Trips list</a>
+  <a class="navButton" routerLink="/trip-form" routerLinkActive="active" *ngIf="usersService.getUserRole() === 'admin' || usersService.getUserRole() === 'worker'">Add Trip</a>
+  <a class="navButton" routerLink="/basket" routerLinkActive="active" *ngIf="usersService.getUserRole() !== ''">Basket</a>
+  <a class="navButton" routerLink="/configuration" routerLinkActive="active" *ngIf="usersService.getUserRole() === 'admin'">Configuration</a>
+  <a class="navButton" (click)="toggleMenu()" #accountButton>
+    My Account
+    <p class="hint" *ngIf="userData !== null">{{userData.email}}</p>
+  </a>
+  <div *ngIf="showAccountOpt" class="account" #accountMenu>
+    <div class="accountOptions" *ngIf="userData !== null">
+      <p class="title">Signed in as:</p>
+      <p class="email">{{userData.email}}</p>
+      <div class="button" (click)="signOut()">Sign out</div>
+    </div>
+    <div class="accountOptions" *ngIf="userData === null">
+      <div class="button" routerLink="/sign-in">Sign in</div>
+      <div class="register">
+        <p class="prompt">Dont have an account? </p>
+        <p class="signUp" routerLink="/sign-up">Sign up here!</p>
+      </div>
+    </div>
+  </div>
+</div>

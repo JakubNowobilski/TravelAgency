@@ -1,0 +1,38 @@
+.configurationWrapper{
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 40px 0;
+  padding: 15px;
+  background-color: white;
+  box-shadow: 0 0 8px 1px #B2B2B2;
+  border-radius: 9px;
+}
+
+.button{
+  text-align: center;
+  border-radius: 6px;
+  background-color: darkslategrey;
+  margin: 20px 15px 15px 15px;
+  width: 100px;
+  height: 40px;
+  border: none;
+  color: white;
+  font-weight: bold;
+}
+
+h3 {
+  margin: 0 0 0 15px;
+  padding: 0;
+}
+
+.buttonDisabled{
+  opacity: 0.5;
+}
+
+.buttonEnabled{
+  opacity: 1;
+}
+
+.buttonEnabled:hover {
+  cursor: pointer;
+}

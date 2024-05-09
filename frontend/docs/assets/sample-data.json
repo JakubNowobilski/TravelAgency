@@ -1,0 +1,117 @@
+{
+  "trips" : [
+    {
+      "bookedPlaces" : 2,
+      "country" : "Italy",
+      "dateEnd" : "2021-8-17",
+      "dateStart" : "2021-8-10",
+      "description" : "The MAGIC LIFE Calabria lines up a packed-to-the-rafters activity programme, lots of restaurants and an exclusive section of the beach.Because this place has its own beach, it’s easy to swap poolside for seaside. The club’s nestled between one of Calabria’s best stretches of sand and hills blanketed by pine trees and vineyards.",
+      "imgURL" : "",
+      "key" : "",
+      "maxPlaces" : 9,
+      "name" : "Magic Life Calabria",
+      "price" : 1030
+    },
+    {
+      "bookedPlaces" : 0,
+      "country" : "Italy",
+      "dateEnd" : "2021-9-19",
+      "dateStart" : "2021-9-5",
+      "description" : "The Janna e Sole boasts a quadruple helping of pools, swish massage rooms* and a handy shuttle bus that goes straight to the nearest sandy swathe.You'll find this hotel perched in a hillside spot looking out over Sardinia's north-east coast. In just 5 minutes' drive, you can reach an almond-coloured beach and Port Ottiolu's restaurant-lined harbour.",
+      "imgURL" : "",
+      "key" : "",
+      "maxPlaces" : 6,
+      "name" : "Janna e Sole",
+      "price" : 1820
+    },
+    {
+      "bookedPlaces" : 2,
+      "country" : "Egypt",
+      "dateEnd" : "2021-12-17",
+      "dateStart" : "2021-12-3",
+      "description" : "Water babies will love this place – as well as being on the beach, it’s got two huge pools and a waterpark.This All Inclusive, beachfront hotel has a waterpark complete with thrill rides and a lazy river – plus there are two lake-style pools.",
+      "imgURL" : "",
+      "key" : "",
+      "maxPlaces" : 11,
+      "name" : "Coral Sea Water World",
+      "price" : 1940
+    },
+    {
+      "bookedPlaces" : 1,
+      "country" : "Egypt",
+      "dateEnd" : "2021-11-22",
+      "dateStart" : "2021-11-1",
+      "description" : "Holiday at the Sol Y Mar Reef Marsa and you’ll be rewarded with a trio of pools, a swim-up bar and a beach with some great spots for scuba diving and snorkelling.This place is right on the sand, so you can easily switch between the pools and the sea. The latter's a fan favourite with scuba divers and snorkellers – the water's loaded with coral reefs. For added relaxation, hit the spa, where there’s a sauna and a steam room.Meal-wise, the main restaurant serves up buffet spreads with themed nights. And in the evenings, the hotel puts on low-key shows, quizzes and live bands.",
+      "imgURL" : "",
+      "key" : "",
+      "maxPlaces" : 8,
+      "name" : "Sol Y Mar Reef Marsa",
+      "price" : 1540
+    },
+    {
+      "bookedPlaces" : 3,
+      "country" : "Greece",
+      "dateEnd" : "2021-7-12",
+      "dateStart" : "2021-7-5",
+      "description" : "With a splash park, a mini-cinema, an assault course and raft-building sessions, the Holiday Village Atlantica Rhodes is more like an adventure playground than a hotel.This place is just five minutes’ walk from a big, pebbly beach. It takes another 10 minutes to reach Kolymbia’s centre.",
+      "imgURL" : "",
+      "key" : "",
+      "maxPlaces" : 3,
+      "name" : "Village Atlantica Rhodes",
+      "price" : 840
+    },
+    {
+      "bookedPlaces" : 0,
+      "country" : "Greece",
+      "dateEnd" : "2021-7-30",
+      "dateStart" : "2021-7-2",
+      "description" : "Whether you’re travelling as a couple or you’ve got the whole family in tow, the beachside Blue Lagoon Village has all bases covered.With a secluded bay location, this sweeping All Inclusive resort makes for an ideal summer escape.",
+      "imgURL" : "",
+      "key" : "",
+      "maxPlaces" : 4,
+      "name" : "Blue Lagoon Village",
+      "price" : 2950
+    },
+    {
+      "bookedPlaces" : 0,
+      "country" : "Spain",
+      "dateEnd" : "2021-9-4",
+      "dateStart" : "2021-8-28",
+      "description" : "Sensatori Ibiza is in a standout spot on the White Isle. It comes with a great beachfront setting and brilliant sunset views.The whole place has been designed to make the most of the views. There’s a rooftop bar, which offers uninterrupted views of the sun setting behind the sea in the evenings. It’s a great spot to relax with a cocktail after dinner.The resort has a look and feel that’s in keeping with the natural beauty of the local area. Low-rise buildings are painted chalk-white, and accents of local cobbled stone are present throughout the complex.",
+      "imgURL" : "",
+      "key" : "",
+      "maxPlaces" : 7,
+      "name" : "SENSATORI Ibiza",
+      "price" : 540
+    },
+    {
+      "bookedPlaces" : 2,
+      "country" : "Spain",
+      "dateEnd" : "2021-8-3",
+      "dateStart" : "2021-7-20",
+      "description" : "Perched on top of a cliff in Playa Paraiso, the Bahia Principe Sunlight Tenerifepairs epic ocean views with a laidback atmosphere.There’s plenty to get on with during a holiday here. You can toast yourself by the pool – a giant lagoon-style number – or play a round of minigolf. There are three restaurants, including a Mexican place.You’re also able to use the facilities of the Bahia Principe Sunlight Costa Adeje next door. These include another big curvy pool and more places to eat – like a Brazilian restaurant.",
+      "imgURL" : "",
+      "key" : "",
+      "maxPlaces" : 13,
+      "name" : "Bahia Sunlight Tenerife",
+      "price" : 2300
+    }
+  ],
+  "users" : [
+    {
+      "email" : "reader@gmail.com",
+      "key" : "",
+      "role" : "reader"
+    },
+    {
+      "email" : "admin@gmail.com",
+      "key" : "",
+      "role" : "admin"
+    },
+    {
+      "email" : "worker@gmail.com",
+      "key" : "",
+      "role" : "worker"
+    }
+  ]
+}

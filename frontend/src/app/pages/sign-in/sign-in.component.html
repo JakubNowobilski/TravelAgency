@@ -1,0 +1,28 @@
+<div class="formWrapper">
+  <form class="formContainer" [formGroup]="signInForm" (ngSubmit)="signIn()">
+    <h2 class="formTitle">Sign In</h2>
+    <div class="formElem">
+      <label class="formLabel" for="email">Email</label>
+      <input type="text" id="email" class="formInput" name="email" formControlName="email" placeholder="Your mail">
+    </div>
+    <div class="formElem">
+      <label class="formLabel" for="password">Password</label>
+      <input type="password" id="password" class="formInput" name="password" formControlName="password" placeholder="Your password">
+    </div>
+    <div *ngIf="errorCode === 'auth/invalid-email' || errorCode === 'auth/wrong-password'">
+      <p class="error">Incorrect credentials</p>
+    </div>
+    <div *ngIf="errorCode === 'auth/user-not-found'">
+      <p class="error">No such user</p>
+      <p class="prompt">Dont have an account?</p>
+      <p class="signUp" routerLink="/sign-up">Sign up here!</p>
+    </div>
+
+    <button type="submit" class="submitButton" [disabled]="!signInForm.valid" [ngClass]="{submitButtonEnabled: signInForm.valid, submitButtonDisabled: !signInForm.valid}">Sign In</button>
+    <hr class="horLine">
+    <div>
+      <p class="prompt">Dont have an account?</p>
+      <p class="signUp" routerLink="/sign-up">Sign up here!</p>
+    </div>
+  </form>
+</div>
