@@ -28,6 +28,7 @@ import {AuthService} from './services/auth.service';
 import {UsersService} from './services/users.service';
 import {AuthGuard} from './guard/auth.guard';
 import { ConfigurationComponent } from './pages/configuration/configuration.component';
+import {HttpClientModule} from "@angular/common/http";
 
 const appRoutes: Routes = [
   {path: 'trips-listing', component: TripsListingComponent},
@@ -62,6 +63,7 @@ const appRoutes: Routes = [
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
     AngularFireDatabaseModule,
+    HttpClientModule,
     RouterModule,
     RouterModule.forRoot(appRoutes),
   ],

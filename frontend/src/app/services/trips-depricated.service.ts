@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {Trip} from '../model/trip';
 import {AngularFireDatabase, AngularFireList} from '@angular/fire/database';
 import {UsersService} from './users.service';
-import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -11,12 +10,10 @@ export class TripsService{
   tripsList: Array<Trip>;
   tripsRef: AngularFireList<any>;
   usersService: UsersService;
-  private httpClient: HttpClient;
   private db: AngularFireDatabase;
 
-  constructor(db: AngularFireDatabase, usersService: UsersService, httpClient: HttpClient) {
+  constructor(db: AngularFireDatabase, usersService: UsersService) {
     this.db = db;
-    this.httpClient = httpClient;
     this.tripsRef = this.db.list('trips');
     this.tripsList = new Array<Trip>();
     this.usersService = usersService;
@@ -24,18 +21,22 @@ export class TripsService{
   }
 
   fetchTrips(): void {
-    this.httpClient.get('http://localhost:8080/trips').subscribe((trips: Array<any>) => {
-      this.tripsList = trips.map((trip) => ({
-        ...trip,
-        key: trip._id,
-        dateStart: new Date(trip.dateStart),
-        dateEnd: new Date(trip.dateEnd)
-      }));
-
-      this.tripsList.sort((a, b) => {
-        return b.price - a.price;
-      });
-      }, (errorMsg) => {
+    this.tripsRef.snapshotChanges().subscribe(
+      (trips) => {
+        this.tripsList = trips.map((trip) => ({
+          ...trip.payload.val(),
+          key: trip.payload.key,
+          dateStart: new Date(trip.payload.val().dateStart),
+          dateEnd: new Date(trip.payload.val().dateEnd)
+        }));
+        // if (this.usersService.getUserRole() === 'reader' || this.usersService.getUserRole() === ''){
+        //   this.tripsList = this.tripsList.filter(p => p.bookedPlaces !== p.maxPlaces);
+        // }
+        this.tripsList.sort((a, b) => {
+          return b.price - a.price;
+        });
+      },
+      (errorMsg) => {
         console.log('Error. Error message: ' + errorMsg);
       }
     );
