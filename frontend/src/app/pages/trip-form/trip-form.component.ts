@@ -43,8 +43,8 @@ export class TripFormComponent implements OnInit {
       this.tripForm.controls.country.value,
       new Date(this.tripForm.controls.dateStart.value),
       new Date(this.tripForm.controls.dateEnd.value),
-      this.tripForm.controls.price.value,
-      this.tripForm.controls.maxPlaces.value,
+      Number(this.tripForm.controls.price.value),
+      Number(this.tripForm.controls.maxPlaces.value),
       this.tripForm.controls.description.value,
       this.tripForm.controls.imgURL.value
     );

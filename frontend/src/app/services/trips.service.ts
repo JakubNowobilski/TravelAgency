@@ -13,6 +13,8 @@ export class TripsService{
   usersService: UsersService;
   private httpClient: HttpClient;
   private db: AngularFireDatabase;
+  private readonly BASE_URL = 'http://localhost:8080/';
+  private readonly TRIPS_URL = this.BASE_URL + 'trips';
 
   constructor(db: AngularFireDatabase, usersService: UsersService, httpClient: HttpClient) {
     this.db = db;
@@ -24,7 +26,7 @@ export class TripsService{
   }
 
   fetchTrips(): void {
-    this.httpClient.get('http://localhost:8080/trips').subscribe((trips: Array<any>) => {
+    this.httpClient.get(this.TRIPS_URL).subscribe((trips: Array<any>) => {
       this.tripsList = trips.map((trip) => ({
         ...trip,
         key: trip._id,
@@ -62,10 +64,16 @@ export class TripsService{
 
   addTrip(trip: Trip): void{
     this.verifyDescriptionVolume(trip);
-    this.tripsRef.push({
-      ...trip,
+    const {key, ...transferTrip} = trip;
+    console.log(transferTrip);
+    this.httpClient.post(this.TRIPS_URL, {
+      ...transferTrip,
       dateStart: trip.dateStart.getFullYear() + '-' + trip.dateStart.getMonth() + '-' + trip.dateStart.getDate(),
       dateEnd: trip.dateEnd.getFullYear() + '-' + trip.dateEnd.getMonth() + '-' + trip.dateEnd.getDate()
+    }).subscribe(result => {
+      console.log(result);
+    }, (errorMsg) => {
+      console.log('Error. Error message: ' + errorMsg);
     });
   }
 

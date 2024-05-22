@@ -14,5 +14,6 @@ export class TripsListingComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    this.tripsService.fetchTrips();
   }
 }
