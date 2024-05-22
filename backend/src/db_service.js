@@ -1,6 +1,6 @@
 const C = require("./constants.js")
 const { MongoClient, ServerApiVersion } = require("mongodb");
-const fu = require("./file_utils");
+const utils = require("./utils");
 
 const client = new MongoClient(C.mongoConnectionString,  {
         serverApi: {
@@ -25,12 +25,28 @@ async function getAllTrips() {
 async function getTripById(id) {
     try {
         const db = await client.db(C.mongoDbName)
-        const trip = await db.collection(C.tripsCollection).findOne({id: id})
+        const trip = await db.collection(C.tripsCollection).findOne({_id: id})
         if (trip !== null) {
             console.log(`Fetched trip by id: ${id}`);
             return trip
         } else {
             console.log(`Could not find trip by id: ${id}`);
+            return undefined
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+async function addTrip(trip) {
+    try {
+        const db = await client.db(C.mongoDbName)
+        const result = await db.collection(C.tripsCollection).insertOne(trip)
+        if (result.insertedId !== null) {
+            console.log(`Added new trip of id: ${result.insertedId}`);
+            return result
+        } else {
+            console.log(`Could not add new trip`);
             return undefined
         }
     } catch (error) {
@@ -44,7 +60,7 @@ async function dropUpdateDb() {
         await db.dropDatabase();
         console.log('Dropped database:', C.mongoDbName);
 
-        const trips = fu.readTripsFromFile()
+        const trips = utils.readTripsFromFile()
 
         const result = await db.collection(C.tripsCollection).insertMany(trips);
         console.log('Inserted demo data:', result.insertedCount);
@@ -81,5 +97,6 @@ module.exports = {
     closeConnection: closeConnection,
     dropUpdateDb: dropUpdateDb,
     getAllTrips: getAllTrips,
-    getTripById: getTripById
+    getTripById: getTripById,
+    addTrip: addTrip
 }
