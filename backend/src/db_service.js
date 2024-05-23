@@ -1,5 +1,5 @@
 const C = require("./constants.js")
-const { MongoClient, ServerApiVersion } = require("mongodb");
+const { MongoClient, ServerApiVersion, ObjectId} = require("mongodb");
 const utils = require("./utils");
 
 const client = new MongoClient(C.mongoConnectionString,  {
@@ -25,7 +25,11 @@ async function getAllTrips() {
 async function getTripById(id) {
     try {
         const db = await client.db(C.mongoDbName)
-        const trip = await db.collection(C.tripsCollection).findOne({_id: id})
+        let trip = await db.collection(C.tripsCollection).findOne({_id: id})
+        if (trip === null) {
+            const objectId = new ObjectId(id)
+            trip = await db.collection(C.tripsCollection).findOne({_id: objectId})
+        }
         if (trip !== null) {
             console.log(`Fetched trip by id: ${id}`);
             return trip
@@ -47,6 +51,66 @@ async function addTrip(trip) {
             return result
         } else {
             console.log(`Could not add new trip`);
+            return undefined
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+async function deleteTrip(id) {
+    try {
+        const db = await client.db(C.mongoDbName)
+        let result = await db.collection(C.tripsCollection).deleteOne({_id: id})
+        if (result.deletedCount === 0) {
+            const objectId = new ObjectId(id)
+            result = await db.collection(C.tripsCollection).deleteOne({_id: objectId})
+        }
+        if (result.deletedCount === 1) {
+            console.log(`Deleted trip of id: ${id}`);
+            return result
+        } else {
+            console.log(`Could not delete trip of id: ${id}`);
+            return undefined
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+async function addBooking(id) {
+    try {
+        const db = await client.db(C.mongoDbName)
+        let result = await db.collection(C.tripsCollection).updateOne({_id: id}, {$inc: {bookedPlaces: 1}})
+        if (result.modifiedCount === 0) {
+            const objectId = new ObjectId(id)
+            result = await db.collection(C.tripsCollection).updateOne({_id: objectId}, {$inc: {bookedPlaces: 1}})
+        }
+        if (result.modifiedCount === 1) {
+            console.log(`Subtracted booking to trip of id: ${id}`);
+            return result
+        } else {
+            console.log(`Could not subtract booking to trip of id: ${id}`);
+            return undefined
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+async function subtractBooking(id) {
+    try {
+        const db = await client.db(C.mongoDbName)
+        let result = await db.collection(C.tripsCollection).updateOne({_id: id}, {$inc: {bookedPlaces: -1}})
+        if (result.modifiedCount === 0) {
+            const objectId = new ObjectId(id)
+            result = await db.collection(C.tripsCollection).updateOne({_id: objectId}, {$inc: {bookedPlaces: -1}})
+        }
+        if (result.modifiedCount === 1) {
+            console.log(`Subtracted booking to trip of id: ${id}`);
+            return result
+        } else {
+            console.log(`Could not subtract booking to trip of id: ${id}`);
             return undefined
         }
     } catch (error) {
@@ -98,5 +162,8 @@ module.exports = {
     dropUpdateDb: dropUpdateDb,
     getAllTrips: getAllTrips,
     getTripById: getTripById,
-    addTrip: addTrip
+    addTrip: addTrip,
+    deleteTrip: deleteTrip,
+    addBooking: addBooking,
+    subtractBooking: subtractBooking
 }
