@@ -41,19 +41,19 @@ export class TripDetailsComponent implements OnInit {
 
   bookPlaceClicked(): void{
     this.tripsService.addBooking(this.getTrip());
-    this.basketService.addPlace(this.getTrip());
+    // this.basketService.addPlace(this.getTrip());
   }
 
   dropPlaceClicked(): void{
     this.tripsService.dropBooking(this.getTrip());
-    this.basketService.dropPlace(this.getTrip());
+    // this.basketService.dropPlace(this.getTrip());
   }
 
   removeTripClicked(): void{
     this.tripsService.removeTrip(this.getTrip());
-    if (this.basketService.getProductQuantity(this.getTrip()) !== 0){
-      this.basketService.dropAllPlaces(this.getTrip());
-    }
+    // if (this.basketService.getProductQuantity(this.getTrip()) !== 0){
+    //   this.basketService.dropAllPlaces(this.getTrip());
+    // }
     this.router.navigate(['/trips-listing']);
   }
 }

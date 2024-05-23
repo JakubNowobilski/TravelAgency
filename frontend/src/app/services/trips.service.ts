@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {Trip} from '../model/trip';
-import {AngularFireDatabase, AngularFireList} from '@angular/fire/database';
 import {UsersService} from './users.service';
 import {HttpClient} from '@angular/common/http';
 
@@ -9,17 +8,15 @@ import {HttpClient} from '@angular/common/http';
 })
 export class TripsService{
   tripsList: Array<Trip>;
-  tripsRef: AngularFireList<any>;
   usersService: UsersService;
   private httpClient: HttpClient;
-  private db: AngularFireDatabase;
   private readonly BASE_URL = 'http://localhost:8080/';
-  private readonly TRIPS_URL = this.BASE_URL + 'trips';
+  private readonly TRIPS_URL = this.BASE_URL + 'trips/';
+  private readonly ADD_BOOKING_URL = this.TRIPS_URL + 'add_booking/';
+  private readonly SUBTRACT_BOOKING_URL = this.TRIPS_URL + 'subtract_booking/';
 
-  constructor(db: AngularFireDatabase, usersService: UsersService, httpClient: HttpClient) {
-    this.db = db;
+  constructor(usersService: UsersService, httpClient: HttpClient) {
     this.httpClient = httpClient;
-    this.tripsRef = this.db.list('trips');
     this.tripsList = new Array<Trip>();
     this.usersService = usersService;
     this.fetchTrips();
@@ -29,7 +26,6 @@ export class TripsService{
     this.httpClient.get(this.TRIPS_URL).subscribe((trips: Array<any>) => {
       this.tripsList = trips.map((trip) => ({
         ...trip,
-        key: trip._id,
         dateStart: new Date(trip.dateStart),
         dateEnd: new Date(trip.dateEnd)
       }));
@@ -43,8 +39,9 @@ export class TripsService{
     );
   }
 
-  getTrip(key: string): Trip{
-    return this.tripsList.find(p => p.key === key);
+  // tslint:disable-next-line:variable-name
+  getTrip(_id: string): Trip{
+    return this.tripsList.find(p => p._id === _id);
   }
 
   indexOfTrip(trip: Trip): number{
@@ -64,7 +61,7 @@ export class TripsService{
 
   addTrip(trip: Trip): void{
     this.verifyDescriptionVolume(trip);
-    const {key, ...transferTrip} = trip;
+    const {_id, ...transferTrip} = trip;
     console.log(transferTrip);
     this.httpClient.post(this.TRIPS_URL, {
       ...transferTrip,
@@ -78,15 +75,29 @@ export class TripsService{
   }
 
   removeTrip(trip: Trip): void{
-    this.tripsRef.remove(trip.key);
+    this.httpClient.delete(this.TRIPS_URL + trip._id).subscribe(result => {
+      console.log(result);
+    }, (errorMsg) => {
+      console.log('Error. Error message: ' + errorMsg);
+    });
   }
 
   addBooking(trip: Trip): void{
-    this.tripsRef.update(trip.key, {bookedPlaces: trip.bookedPlaces + 1});
+    this.httpClient.get(this.ADD_BOOKING_URL + trip._id).subscribe(result => {
+      console.log(result);
+      trip.bookedPlaces += 1;
+    }, (errorMsg) => {
+      console.log('Error. Error message: ' + errorMsg);
+    });
   }
 
   dropBooking(trip: Trip): void{
-    this.tripsRef.update(trip.key, {bookedPlaces: trip.bookedPlaces - 1});
+    this.httpClient.get(this.SUBTRACT_BOOKING_URL + trip._id).subscribe(result => {
+      console.log(result);
+      trip.bookedPlaces -= 1;
+    }, (errorMsg) => {
+      console.log('Error. Error message: ' + errorMsg);
+    });
   }
 
   getTotalPlacesBooked(): number{

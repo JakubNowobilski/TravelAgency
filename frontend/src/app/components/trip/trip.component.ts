@@ -31,11 +31,11 @@ export class TripComponent implements OnInit{
 
   bookPlaceClicked(): void{
     this.tripsService.addBooking(this.trip);
-    this.basketService.addPlace(this.trip);
+    // this.basketService.addPlace(this.trip);
   }
 
   dropPlaceClicked(): void{
     this.tripsService.dropBooking(this.trip);
-    this.basketService.dropPlace(this.trip);
+    // this.basketService.dropPlace(this.trip);
   }
 }

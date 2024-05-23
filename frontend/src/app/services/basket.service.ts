@@ -41,20 +41,20 @@ export class BasketService {
   }
 
   addPlace(trip: Trip): void {
-     const product = this.productsList.find(p => p.trip.key === trip.key);
+     const product = this.productsList.find(p => p.trip._id === trip._id);
      if (product !== undefined){
        this.productsRef.update(product.key, {quantity: product.quantity + 1});
      }
      else{
        this.productsRef.push({
-         tripKey: trip.key,
+         tripKey: trip._id,
          quantity: 1
        });
      }
   }
 
   dropPlace(trip: Trip): void {
-    const product = this.productsList.find(p => p.trip.key === trip.key);
+    const product = this.productsList.find(p => p.trip._id === trip._id);
     if (product !== undefined){
       if (product.quantity === 1){
         this.productsRef.remove(product.key);
@@ -69,7 +69,7 @@ export class BasketService {
   }
 
   dropAllPlaces(trip: Trip): void {
-    const product = this.productsList.find(p => p.trip.key === trip.key);
+    const product = this.productsList.find(p => p.trip._id === trip._id);
     if (product !== undefined){
       this.productsRef.remove(product.key);
     }
@@ -79,7 +79,7 @@ export class BasketService {
   }
 
   getProductQuantity(trip: Trip): number {
-    const product = this.productsList.find(p => p.trip.key === trip.key);
+    const product = this.productsList.find(p => p.trip._id === trip._id);
     if (product !== undefined){
       return product.quantity;
     }
@@ -94,7 +94,7 @@ export class BasketService {
   }
 
   getProductPrice(trip: Trip): number{
-    const product = this.productsList.find(p => p.trip.key === trip.key);
+    const product = this.productsList.find(p => p.trip._id === trip._id);
     if (product !== undefined){
       return product.quantity * product.trip.price;
     }
