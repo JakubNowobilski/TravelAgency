@@ -78,7 +78,7 @@ async function addBooking(id) {
             result = await db.collection(C.productsCollection).updateOne({_id: objectId}, {$inc: {quantity: 1}})
         }
         if (result.modifiedCount === 1) {
-            console.log(`Subtracted booking to product of id: ${id}`);
+            console.log(`Added booking to product of id: ${id}`);
             return result
         } else {
             console.log(`Could not subtract booking to product of id: ${id}`);

@@ -49,8 +49,8 @@ function productsController(app) {
 
     app.get("/products", ((req, res) => {
         utils.printReqSummary(req)
-        db_products.getAllProducts().then((product) => {
-            return res.status(200).send(product)
+        db_products.getAllProducts().then((products) => {
+            return res.status(200).send(products)
         })
     }))
 

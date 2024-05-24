@@ -37,6 +37,17 @@ function validateProduct(product) {
     }
 }
 
+function validateUser(user) {
+    const requiredAttributes = ["email", "role"]
+    const userAttributes = Object.keys(user)
+    if (userAttributes.every(e => requiredAttributes.includes(e)) &&
+        requiredAttributes.every(e => userAttributes.includes(e))) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 function printReqSummary(req) {
     console.log("Handling " + req.method + " " + decodeURI(req.originalUrl));
 }
@@ -45,5 +56,6 @@ module.exports = {
     readDemoDataFromFile: readDemoDataFromFile,
     validateTrip: validateTrip,
     validateProduct: validateProduct,
+    validateUser: validateUser,
     printReqSummary: printReqSummary
 }

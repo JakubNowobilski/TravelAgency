@@ -126,16 +126,19 @@
   ],
   "users" : [
     {
-      "email" : "reader@reader.com",
-      "role" : "reader"
+      "_id": "6650d8e5f95e0757800a6326",
+      "email": "reader@reader.com",
+      "role": "reader"
     },
     {
-      "email" : "admin@admin.com",
-      "role" : "admin"
+      "_id": "6650d8e5f95e0757800a6327",
+      "email": "admin@admin.com",
+      "role": "admin"
     },
     {
-      "email" : "worker@worker.com",
-      "role" : "worker"
+      "_id": "6650d8e5f95e0757800a6328",
+      "email": "worker@worker.com",
+      "role": "worker"
     }
   ]
 }
