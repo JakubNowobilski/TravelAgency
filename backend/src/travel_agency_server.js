@@ -1,5 +1,6 @@
 const db = require("./db_service")
 const utils = require("./utils");
+const tripsController = require("./controller/trips_controller");
 const express = require("express");
 const cors = require("cors");
 const port = 8080;
@@ -9,71 +10,10 @@ app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({extended: true}))
 
-app.get("/trips/add_booking/:id", ((req, res) => {
-    printReqSummary(req)
-    db.addBooking(req.params.id).then((result) => {
-        if (result !== undefined) {
-            return res.status(200).send(result)
-        } else {
-            return res.status(404).send({error: 'Data not found'})
-        }
-    })
-}))
-
-app.get("/trips/subtract_booking/:id", ((req, res) => {
-    printReqSummary(req)
-    db.subtractBooking(req.params.id).then((result) => {
-        if (result !== undefined) {
-            return res.status(200).send(result)
-        } else {
-            return res.status(404).send({error: 'Data not found'})
-        }
-    })
-}))
-
-app.delete("/trips/:id", ((req, res) => {
-    printReqSummary(req)
-    db.deleteTrip(req.params.id).then((result) => {
-        if (result !== undefined) {
-            return res.status(200).send(result)
-        } else {
-            return res.status(404).send({error: 'Data not found'})
-        }
-    })
-}))
-
-app.post("/trips", ((req, res) => {
-    printReqSummary(req)
-    const trip = req.body
-    if (utils.validateTrip(trip)) {
-        db.addTrip(trip).then(result => {
-            return res.status(200).send(result)
-        })
-    } else {
-        return res.status(404).send({error: 'Invalid trip data'})
-    }
-}))
-
-app.get("/trips", ((req, res) => {
-    printReqSummary(req)
-    db.getAllTrips().then((trips) => {
-        return res.status(200).send(trips)
-    })
-}))
-
-app.get("/trips/:id", ((req, res) => {
-    printReqSummary(req)
-    db.getTripById(req.params.id).then((trip) => {
-        if (trip !== undefined) {
-            return res.status(200).send(trip)
-        } else {
-            return res.status(404).send({error: 'Data not found'})
-        }
-    })
-}))
+tripsController.tripsController(app)
 
 app.get("/*", ((req, res) => {
-    printReqSummary(req)
+    utils.printReqSummary(req)
     res.status(200).send({hello_world: "OK"});
 }))
 
@@ -83,6 +23,3 @@ app.listen(port, () => {
     })
 })
 
-function printReqSummary(req) {
-    console.log("Handling " + req.method + " " + decodeURI(req.originalUrl));
-}

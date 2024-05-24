@@ -19,7 +19,12 @@ function validateTrip(trip) {
     }
 }
 
+function printReqSummary(req) {
+    console.log("Handling " + req.method + " " + decodeURI(req.originalUrl));
+}
+
 module.exports = {
     readTripsFromFile: readTripsFromFile,
-    validateTrip: validateTrip
+    validateTrip: validateTrip,
+    printReqSummary: printReqSummary
 }
