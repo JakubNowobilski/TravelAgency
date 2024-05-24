@@ -22,21 +22,6 @@ function validateTrip(trip) {
     }
 }
 
-function validateProduct(product) {
-    const requiredAttributes = ["quantity", "tripId"]
-    const productAttributes = Object.keys(product)
-    if (productAttributes.every(e => requiredAttributes.includes(e)) &&
-        requiredAttributes.every(e => productAttributes.includes(e))) {
-        if (Number.isInteger(product.quantity)){
-            return true;
-        } else {
-            return false;
-        }
-    } else {
-        return false;
-    }
-}
-
 function validateUser(user) {
     const requiredAttributes = ["email", "role"]
     const userAttributes = Object.keys(user)
@@ -55,7 +40,6 @@ function printReqSummary(req) {
 module.exports = {
     readDemoDataFromFile: readDemoDataFromFile,
     validateTrip: validateTrip,
-    validateProduct: validateProduct,
     validateUser: validateUser,
     printReqSummary: printReqSummary
 }

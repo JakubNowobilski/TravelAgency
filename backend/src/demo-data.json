@@ -97,33 +97,6 @@
       "price" : 2300
     }
   ],
-  "products": [
-    {
-      "_id": "6650d674d8e31f5de76f5134",
-      "quantity": 2,
-      "tripId": "664e1415352e1f49118dad6e"
-    },
-    {
-      "_id": "6650d674d8e31f5de76f5135",
-      "quantity": 2,
-      "tripId": "664e14614e6343bf81d1cfd6"
-    },
-    {
-      "_id": "6650d674d8e31f5de76f5136",
-      "quantity": 1,
-      "tripId": "664e14614e6343bf81d1cfd7"
-    },
-    {
-      "_id": "6650d674d8e31f5de76f5137",
-      "quantity": 3,
-      "tripId": "664e14614e6343bf81d1cfd8"
-    },
-    {
-      "_id": "6650d674d8e31f5de76f5138",
-      "quantity": 2,
-      "tripId": "664e14614e6343bf81d1cfda"
-    }
-  ],
   "users" : [
     {
       "_id": "6650d8e5f95e0757800a6326",

@@ -1,7 +1,6 @@
 const db = require("./db/db_service")
 const utils = require("./utils");
 const tripsController = require("./controller/trips_controller");
-const productsController = require("./controller/products_controller");
 const usersController = require("./controller/users_controller");
 const express = require("express");
 const cors = require("cors");
@@ -13,7 +12,6 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}))
 
 tripsController.tripsController(app)
-productsController.productsController(app)
 usersController.usersController(app)
 
 app.get("/*", ((req, res) => {

@@ -20,7 +20,6 @@ async function dropUpdateDb() {
         const demoData = utils.readDemoDataFromFile()
 
         await insertIntoCollection(db, C.tripsCollection, demoData.trips)
-        await insertIntoCollection(db, C.productsCollection, demoData.products)
         await insertIntoCollection(db, C.usersCollection, demoData.users)
 
     } catch (error) {
