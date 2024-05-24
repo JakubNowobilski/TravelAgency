@@ -1,5 +1,5 @@
 const C = require("./constants.js")
-const db = require("./db_service")
+const db = require("./db/db_service")
 
 async function run() {
     await db.connectDb()

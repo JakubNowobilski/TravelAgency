@@ -1,4 +1,4 @@
-const db = require("./db_service")
+const db = require("./db/db_service")
 const utils = require("./utils");
 const tripsController = require("./controller/trips_controller");
 const express = require("express");

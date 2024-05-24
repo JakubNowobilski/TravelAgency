@@ -1,8 +1,8 @@
 const fs = require("fs");
 
-function readTripsFromFile() {
+function readDemoDataFromFile() {
     const demo_data = fs.readFileSync('demo-data.json', 'utf8')
-    return JSON.parse(demo_data).trips
+    return JSON.parse(demo_data)
 }
 
 function validateTrip(trip) {
@@ -24,7 +24,7 @@ function printReqSummary(req) {
 }
 
 module.exports = {
-    readTripsFromFile: readTripsFromFile,
+    readDemoDataFromFile: readDemoDataFromFile,
     validateTrip: validateTrip,
     printReqSummary: printReqSummary
 }
