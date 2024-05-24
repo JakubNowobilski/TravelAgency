@@ -59,6 +59,10 @@ export class TripsService{
     return this.tripsList;
   }
 
+  getNonEmptyTripsList(): Array<Trip> {
+    return this.tripsList.filter(t => t.bookedPlaces !== 0);
+  }
+
   addTrip(trip: Trip): void{
     this.verifyDescriptionVolume(trip);
     const {_id, ...transferTrip} = trip;
@@ -111,4 +115,13 @@ export class TripsService{
         ' is longer than ' + descriptionLimit + ' characters. May not fit in the space.');
     }
   }
+
+  getTotalPrice(): number{
+    return this.tripsList.reduce<number>((acc, trip) => acc += trip.price * trip.bookedPlaces, 0);
+  }
+
+  getProductPrice(trip: Trip): number{
+    return trip.price * trip.bookedPlaces;
+  }
+
 }

@@ -3,6 +3,7 @@ import {Product} from '../model/product';
 import {Trip} from '../model/trip';
 import {AngularFireDatabase, AngularFireList} from '@angular/fire/database';
 import {TripsService} from './trips.service';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -12,25 +13,42 @@ export class BasketService {
   productsRef: AngularFireList<any>;
   private db: AngularFireDatabase;
   tripsService: TripsService;
+  private httpClient: HttpClient;
+  private readonly BASE_URL = 'http://localhost:8080/';
+  private readonly PRODUCTS_URL = this.BASE_URL + 'products/';
+  private readonly ADD_BOOKING_URL = this.PRODUCTS_URL + 'add_booking/';
+  private readonly SUBTRACT_BOOKING_URL = this.PRODUCTS_URL + 'subtract_booking/';
 
-  constructor(db: AngularFireDatabase, tripsService: TripsService) {
+  constructor(db: AngularFireDatabase, tripsService: TripsService, httpClient: HttpClient) {
     this.db = db;
     this.tripsService = tripsService;
+    this.httpClient = httpClient;
     this.productsRef = this.db.list('products');
     this.productsList = new Array<Product>();
     this.fetchProducts();
   }
 
   fetchProducts(): void {
-    this.productsRef.snapshotChanges().subscribe(
-      (products) => {
+    this.httpClient.get(this.PRODUCTS_URL).subscribe((products: Array<any>) => {
         this.productsList = products.map((product) => ({
-          quantity: product.payload.val().quantity,
-          key: product.payload.key,
-          trip: this.tripsService.getTrip(product.payload.val().tripKey)
+          _id: product._id,
+          key: product._id,
+          quantity: product.quantity,
+          trip: this.tripsService.getTrip(product.tripId)
         }));
-      },
-      (errorMsg) => {
+        if (this.productsList.some(e => e.trip === undefined)) {
+          console.log('Dupa');
+          // this.tripsService.fetchTrips();
+          this.productsList.forEach(e => {
+            this.productsList = products.map((product) => ({
+              _id: product._id,
+              key: product._id,
+              quantity: product.quantity,
+              trip: this.tripsService.getTrip(product.tripId)
+            }));
+          });
+        }
+      }, (errorMsg) => {
         console.log('Error. Error message: ' + errorMsg);
       }
     );
@@ -43,12 +61,25 @@ export class BasketService {
   addPlace(trip: Trip): void {
      const product = this.productsList.find(p => p.trip._id === trip._id);
      if (product !== undefined){
-       this.productsRef.update(product.key, {quantity: product.quantity + 1});
+       this.httpClient.get(this.ADD_BOOKING_URL + product._id).subscribe(result => {
+         console.log(result);
+         product.quantity += 1;
+         trip.bookedPlaces += 1;
+       }, (errorMsg) => {
+         console.log('Error. Error message: ' + errorMsg);
+       });
      }
      else{
-       this.productsRef.push({
-         tripKey: trip._id,
+       this.httpClient.post(this.PRODUCTS_URL, {
+         tripId: trip._id,
          quantity: 1
+       }).subscribe((result: any) => {
+         const newProduct = new Product(result.insertedId, result.insertedId, trip, 1);
+         this.productsList.push(newProduct);
+         trip.bookedPlaces = 1;
+         console.log(result);
+       }, (errorMsg) => {
+         console.log('Error. Error message: ' + errorMsg);
        });
      }
   }

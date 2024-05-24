@@ -41,12 +41,10 @@ export class TripDetailsComponent implements OnInit {
 
   bookPlaceClicked(): void{
     this.tripsService.addBooking(this.getTrip());
-    // this.basketService.addPlace(this.getTrip());
   }
 
   dropPlaceClicked(): void{
     this.tripsService.dropBooking(this.getTrip());
-    // this.basketService.dropPlace(this.getTrip());
   }
 
   removeTripClicked(): void{
