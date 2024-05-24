@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Trip} from '../../model/trip';
-import {BasketService} from '../../services/basket.service';
 import {TripsService} from '../../services/trips.service';
 import {UsersService} from '../../services/users.service';
 
@@ -15,7 +14,6 @@ export class TripComponent implements OnInit{
   @Input() isLast: boolean;
   tripIdx: number;
 
-  basketService: BasketService;
   tripsService: TripsService;
   usersService: UsersService;
 
@@ -23,8 +21,7 @@ export class TripComponent implements OnInit{
     this.tripIdx = this.tripsService.indexOfTrip(this.trip);
   }
 
-  constructor(basketService: BasketService, tripsService: TripsService, usersService: UsersService) {
-    this.basketService = basketService;
+  constructor(tripsService: TripsService, usersService: UsersService) {
     this.tripsService = tripsService;
     this.usersService = usersService;
   }

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {BasketService} from '../../services/basket.service';
 import {TripsService} from '../../services/trips.service';
 
 @Component({
@@ -8,11 +7,9 @@ import {TripsService} from '../../services/trips.service';
   styleUrls: ['./basket.component.css']
 })
 export class BasketComponent implements OnInit {
-  basketService: BasketService;
   tripsService: TripsService;
 
-  constructor(basketService: BasketService, tripsService: TripsService) {
-    this.basketService = basketService;
+  constructor(tripsService: TripsService) {
     this.tripsService = tripsService;
   }
 

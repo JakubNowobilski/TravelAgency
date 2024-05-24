@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {TripsService} from '../../services/trips.service';
 import {Trip} from '../../model/trip';
-import {BasketService} from '../../services/basket.service';
 import {UsersService} from '../../services/users.service';
 
 @Component({
@@ -14,15 +13,13 @@ export class TripDetailsComponent implements OnInit {
   private route: ActivatedRoute;
   private router: Router;
   tripsService: TripsService;
-  basketService: BasketService;
   usersService: UsersService;
   idx: number;
 
-  constructor(route: ActivatedRoute, router: Router, tripsService: TripsService, basketService: BasketService, usersService: UsersService) {
+  constructor(route: ActivatedRoute, router: Router, tripsService: TripsService, usersService: UsersService) {
     this.route = route;
     this.router = router;
     this.tripsService = tripsService;
-    this.basketService = basketService;
     this.usersService = usersService;
   }
 
@@ -49,9 +46,6 @@ export class TripDetailsComponent implements OnInit {
 
   removeTripClicked(): void{
     this.tripsService.removeTrip(this.getTrip());
-    // if (this.basketService.getProductQuantity(this.getTrip()) !== 0){
-    //   this.basketService.dropAllPlaces(this.getTrip());
-    // }
     this.router.navigate(['/trips-listing']);
   }
 }

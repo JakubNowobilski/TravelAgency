@@ -1,22 +1,22 @@
 import { Injectable } from '@angular/core';
-import {AngularFireDatabase, AngularFireList} from '@angular/fire/database';
 import {User} from '../model/user';
 import {AuthService} from './auth.service';
 import firebase from 'firebase';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
   usersList: Array<User>;
-  usersRef: AngularFireList<any>;
   authService: AuthService;
   userData: firebase.User = null;
-  private db: AngularFireDatabase;
+  private httpClient: HttpClient;
+  private readonly BASE_URL = 'http://localhost:8080/';
+  private readonly USERS_URL = this.BASE_URL + 'users/';
 
-  constructor(db: AngularFireDatabase, authService: AuthService) {
-    this.db = db;
-    this.usersRef = this.db.list('users');
+  constructor(httpClient: HttpClient, authService: AuthService) {
+    this.httpClient = httpClient;
     this.usersList = new Array<User>();
     this.authService = authService;
     this.authService.getUserData().subscribe((userData) => {
@@ -26,14 +26,11 @@ export class UsersService {
   }
 
   fetchUsers(): void {
-    this.usersRef.snapshotChanges().subscribe(
-      (users) => {
-        this.usersList = users.map((trip) => ({
-          ...trip.payload.val(),
-          key: trip.payload.key,
+    this.httpClient.get(this.USERS_URL).subscribe((users: Array<any>) => {
+        this.usersList = users.map((user) => ({
+          ...user
         }));
-      },
-      (errorMsg) => {
+      }, (errorMsg) => {
         console.log('Error. Error message: ' + errorMsg);
       }
     );
@@ -48,19 +45,41 @@ export class UsersService {
   }
 
   addUser(user: User): void{
-    this.usersRef.push({
-      ...user,
+    this.httpClient.post(this.USERS_URL, {
+      email: user.email,
+      role: user.role,
+    }).subscribe((result: any) => {
+      console.log(result);
+      const insertedId = result.insertedId;
+      if (insertedId !== undefined) {
+        user._id = insertedId;
+        this.usersList.push(user);
+      }
+    }, (errorMsg) => {
+      console.log('Error. Error message: ' + errorMsg);
     });
   }
 
+  addUserIfNotExists(email: string): void{
+    if (this.getUser(email) === undefined) {
+      const newUser = new User('', email, 'reader');
+      this.addUser(newUser);
+    }
+  }
+
   removeUser(user: User): void{
-    this.usersRef.remove(user.key);
+    this.httpClient.delete(this.USERS_URL + user._id).subscribe(result => {
+      console.log(result);
+    }, (errorMsg) => {
+      console.log('Error. Error message: ' + errorMsg);
+    });
   }
 
   getUserRole(): string{
     if (this.userData){
-      if (this.getUser(this.userData.email)){
-        return this.getUser(this.userData.email).role;
+      const user = this.getUser(this.userData.email);
+      if (user !== undefined){
+        return user.role;
       }
       else {
         return '';

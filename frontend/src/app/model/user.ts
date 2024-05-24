@@ -1,15 +1,13 @@
-import {Product} from './product';
-
 export class User{
-  key: string;
+  // tslint:disable-next-line:variable-name
+  _id: string;
   email: string;
   role: string;
-  basket: Array<Product>;
 
-  constructor(key: string, email: string, role: string, basket: Array<Product>) {
+  // tslint:disable-next-line:variable-name
+  constructor(_id: string, email: string, role: string) {
+    this._id = _id;
     this.email = email;
     this.role = role;
-    this.key = key;
-    this.basket = basket;
   }
 }

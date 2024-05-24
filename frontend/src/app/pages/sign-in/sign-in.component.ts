@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
+import {UsersService} from '../../services/users.service';
 
 
 @Component({
@@ -11,13 +12,15 @@ import {Router} from '@angular/router';
 })
 export class SignInComponent implements OnInit {
   authService: AuthService;
+  usersService: UsersService;
   signInForm: FormGroup;
   formBuilder: FormBuilder;
   errorCode: string;
   router: Router;
 
-  constructor(authService: AuthService, formBuilder: FormBuilder, router: Router) {
+  constructor(authService: AuthService, usersService: UsersService, formBuilder: FormBuilder, router: Router) {
     this.authService = authService;
+    this.usersService = usersService;
     this.formBuilder = formBuilder;
     this.router = router;
     this.errorCode = '';
@@ -33,6 +36,7 @@ export class SignInComponent implements OnInit {
   signIn(): void{
     this.authService.signIn(this.signInForm.controls.email.value, this.signInForm.controls.password.value).then(
       (userCredentials) => {
+        this.usersService.addUserIfNotExists(this.signInForm.controls.email.value);
         this.router.navigate(['/trips-listing']);
       },
       (error) => {

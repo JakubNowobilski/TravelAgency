@@ -66,7 +66,6 @@ export class TripsService{
   addTrip(trip: Trip): void{
     this.verifyDescriptionVolume(trip);
     const {_id, ...transferTrip} = trip;
-    console.log(transferTrip);
     this.httpClient.post(this.TRIPS_URL, {
       ...transferTrip,
       dateStart: trip.dateStart.getFullYear() + '-' + trip.dateStart.getMonth() + '-' + trip.dateStart.getDate(),

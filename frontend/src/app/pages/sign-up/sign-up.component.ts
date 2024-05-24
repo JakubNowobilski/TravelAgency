@@ -37,7 +37,7 @@ export class SignUpComponent implements OnInit {
     this.authService.signUp(this.signUpForm.controls.email.value, this.signUpForm.controls.password.value).then(
       (userCredentials) => {
         this.router.navigate(['/trips-listing']);
-        const newUser = new User('', this.signUpForm.controls.email.value, 'reader', []);
+        const newUser = new User('', this.signUpForm.controls.email.value, 'reader');
         this.usersService.addUser(newUser);
       },
       (error) => {

@@ -11,7 +11,6 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 
 import {TripsService} from './services/trips.service';
-import {BasketService} from './services/basket.service';
 
 import {ReactiveFormsModule} from '@angular/forms';
 import {AngularFireModule} from '@angular/fire';
@@ -69,7 +68,6 @@ const appRoutes: Routes = [
   ],
   providers: [
     TripsService,
-    BasketService,
     AuthService,
     UsersService
   ],
