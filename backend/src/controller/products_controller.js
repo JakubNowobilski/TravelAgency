@@ -1,10 +1,10 @@
-const db = require("../db/db_service");
+const db_products = require("../db/db_products_service");
 const utils = require("../utils");
 
 function productsController(app) {
     app.get("/products/add_booking/:id", ((req, res) => {
         utils.printReqSummary(req)
-        db.addBooking(req.params.id).then((result) => {
+        db_products.addBooking(req.params.id).then((result) => {
             if (result !== undefined) {
                 return res.status(200).send(result)
             } else {
@@ -13,9 +13,9 @@ function productsController(app) {
         })
     }))
 
-    app.get("/trips/subtract_booking/:id", ((req, res) => {
+    app.get("/products/subtract_booking/:id", ((req, res) => {
         utils.printReqSummary(req)
-        db.subtractBooking(req.params.id).then((result) => {
+        db_products.subtractBooking(req.params.id).then((result) => {
             if (result !== undefined) {
                 return res.status(200).send(result)
             } else {
@@ -24,9 +24,9 @@ function productsController(app) {
         })
     }))
 
-    app.delete("/trips/:id", ((req, res) => {
+    app.delete("/products/:id", ((req, res) => {
         utils.printReqSummary(req)
-        db.deleteTrip(req.params.id).then((result) => {
+        db_products.deleteProduct(req.params.id).then((result) => {
             if (result !== undefined) {
                 return res.status(200).send(result)
             } else {
@@ -35,30 +35,30 @@ function productsController(app) {
         })
     }))
 
-    app.post("/trips", ((req, res) => {
+    app.post("/products", ((req, res) => {
         utils.printReqSummary(req)
-        const trip = req.body
-        if (utils.validateTrip(trip)) {
-            db.addTrip(trip).then(result => {
+        const product = req.body
+        if (utils.validateProduct(product)) {
+            db_products.addProduct(product).then(result => {
                 return res.status(200).send(result)
             })
         } else {
-            return res.status(404).send({error: 'Invalid trip data'})
+            return res.status(404).send({error: 'Invalid product data'})
         }
     }))
 
-    app.get("/trips", ((req, res) => {
+    app.get("/products", ((req, res) => {
         utils.printReqSummary(req)
-        db.getAllTrips().then((trips) => {
-            return res.status(200).send(trips)
+        db_products.getAllProducts().then((product) => {
+            return res.status(200).send(product)
         })
     }))
 
-    app.get("/trips/:id", ((req, res) => {
+    app.get("/products/:id", ((req, res) => {
         utils.printReqSummary(req)
-        db.getTripById(req.params.id).then((trip) => {
-            if (trip !== undefined) {
-                return res.status(200).send(trip)
+        db_products.getProductById(req.params.id).then((product) => {
+            if (product !== undefined) {
+                return res.status(200).send(product)
             } else {
                 return res.status(404).send({error: 'Data not found'})
             }

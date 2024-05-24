@@ -12,8 +12,26 @@ function validateTrip(trip) {
     if (tripAttributes.every(e => requiredAttributes.includes(e)) &&
         requiredAttributes.every(e => tripAttributes.includes(e))) {
         const integerFields = [trip.bookedPlaces, trip.maxPlaces, trip.price]
-        if (integerFields.every(e => Number.isInteger(e)))
-        return true;
+        if (integerFields.every(e => Number.isInteger(e))){
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+}
+
+function validateProduct(product) {
+    const requiredAttributes = ["quantity", "tripId"]
+    const productAttributes = Object.keys(product)
+    if (productAttributes.every(e => requiredAttributes.includes(e)) &&
+        requiredAttributes.every(e => productAttributes.includes(e))) {
+        if (Number.isInteger(product.quantity)){
+            return true;
+        } else {
+            return false;
+        }
     } else {
         return false;
     }
@@ -26,5 +44,6 @@ function printReqSummary(req) {
 module.exports = {
     readDemoDataFromFile: readDemoDataFromFile,
     validateTrip: validateTrip,
+    validateProduct: validateProduct,
     printReqSummary: printReqSummary
 }
