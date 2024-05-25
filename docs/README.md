@@ -9,6 +9,7 @@
 * [Technologie](#Technologie)
 * [Kluczowe komponenty](#Kluczowe-komponenty)
 * [Kluczowe funkcjonalności](#Kluczowe-funkcjonalności)
+* [Dokumentacja techniczna](#Dokumentacja-techniczna)
 * [Setup](#Setup)
 * [Stan rozwoju aplikacji](#Stan-rozwoju-aplikacji)
 * [Licencja](#Licencja)
@@ -78,6 +79,46 @@ typów użytkowników.
 przed nieautoryzowanymi użytkownikami. Przykładowo Goście (niezalogowani użytkownicy) nie mają dostępu do widoku koszyka,
 a jeśli spróbują przejść do strony koszyka poprzez wpisanie adresu URL koszyka zostaną przekierowani do strony
 <em>nieznaleziono</em>.
+
+## Dokumentacja techniczna
+
+### Baza danych
+Wykorzystana w projekcie baza danych to dokumentowa baza danych [MongoDB](https://www.mongodb.com/).
+Składa się z dwóch kolekcji **trips** oraz **users**. Nie posiada ona ustalonego schematu danych, ale obiekty tych
+kolekcji składają się z następujących pól:
+#### trips
+    {
+        _id: string,
+        name: string,
+        country: string,
+        dateStart: Date,
+        dateEnd: Date,
+        price: number,
+        maxPlaces: number,
+        bookedPlaces: number,
+        description: string,
+        imgURL: string
+    }
+
+#### users
+    {
+        _id: string,
+        email: string,
+        role: string
+    }
+
+### Backend
+Backend aplikacji stanowi serwer HTTP napisany w [NodeJS](https://nodejs.org/en). Do obsługi zapytań wykorzystywana jest
+biblioteka [Express](https://expressjs.com/). Aplikacja składa się z dwóch kontrolerów: **trpis_controller** oraz
+**users_controller**. Każdy z nich odpowiada za obsługiwanie żądań HTTP dla odpowiednich końcówek. Serwer obsługuje
+typowe zapytania CRUD dla obydwu kontrolerów: Create, Read, Update, Delete.
+Połączenie z bazą danych jest zrealizowane za pomocą sterownika
+[MongoDB Node Driver](https://www.mongodb.com/docs/drivers/node/current/).
+
+![backend-schema](pics/backend-schema.png)
+
+Dodatkowo, backend zawiera skrypt pomocniczy, który pozwoli załadować dane demo do bazy danych:
+[drop_update_demo.js](../backend/src/drop_update_demo.js)
 
 ## Setup
 Jeśli chcesz samodzielnie użytkować aplikację, jest kilka kroków, które musisz wykonać aby uruchomić ją na swoim
