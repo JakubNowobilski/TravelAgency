@@ -82,6 +82,12 @@ a jeśli spróbują przejść do strony koszyka poprzez wpisanie adresu URL kosz
 
 ## Dokumentacja techniczna
 
+Aplikacja ma typową trójwarstwową architekturę. Składa się z bazy danych MongoDB, backendu zaimplementowanego w NodeJS
+oraz frontendu zaimplementowanego w Angularze. Komunikacje między frontendem a backendem jest zrealizowana za pomocą
+REST API.
+
+![system-architecture](pics/system-architecture.png)
+
 ### Baza danych
 Wykorzystana w projekcie baza danych to dokumentowa baza danych [MongoDB](https://www.mongodb.com/).
 Składa się z dwóch kolekcji **trips** oraz **users**. Nie posiada ona ustalonego schematu danych, ale obiekty tych
@@ -119,6 +125,20 @@ Połączenie z bazą danych jest zrealizowane za pomocą sterownika
 
 Dodatkowo, backend zawiera skrypt pomocniczy, który pozwoli załadować dane demo do bazy danych:
 [drop_update_demo.js](../backend/src/drop_update_demo.js)
+
+### Frontend
+Frontend aplikacji został zaimplementowany przy użyciu popularnego frameworku [Angular](https://v11.angular.io/docs).
+Kod został typowo pogrupowany w moduły wydzielając logicznie funkcje każdego z nich:
+
+* **model** - zawiera reprezentację modelu biznesowego aplikacji. Składa się z dwóch klas: **trip** oraz **user**
+* **components** - zawiera re-używalne komponenty Angulara - małe fragmenty aplikacji internetowej
+* **pages** - zawiera główne strony aplikacji w formie komponentów Angulara
+* **services** - zawiera serwisy aplikacji pozwalające na komunikację się między komponentami oraz dostęp do danych:
+  * **auth** - serwis realizujący logikę uwierzytelniania
+  * **trips** - serwis dostępu do danych związanych z wycieczkami
+  * **users** - serwis dostępu do danych związanych z użytkownikami
+* **navigation** - komponent Angulara będący głównym paskiem nawigacji w aplikacji
+* **guard** - zawiera strażników obsługujących logikę kontroli dostępu do poszczególnych części aplikacji
 
 ## Setup
 Jeśli chcesz samodzielnie użytkować aplikację, jest kilka kroków, które musisz wykonać aby uruchomić ją na swoim
