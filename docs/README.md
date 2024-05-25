@@ -30,6 +30,8 @@ uwierzytelniania. Wszystkie oryginalne wymagania wobec aplikacji znajdują się 
 * [AngularFire 6.1.4](https://github.com/angular/angularfire)
 * [MongoDB](https://www.mongodb.com/)
 * [NodeJS](https://nodejs.org/en)
+* [Express](https://expressjs.com/)
+* [MongoDB Node Driver](https://www.mongodb.com/docs/drivers/node/current/)
 * [Firebase Authentication](https://firebase.google.com/docs/auth)
 * [Firebase Cloud Storage](https://firebase.google.com/docs/storage)
 
