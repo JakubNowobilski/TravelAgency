@@ -1,85 +1,107 @@
-# TravelAgency - Web App
+# TravelAgency - Projektowanie Aplikacji Internetowych
 
 ![Trips listing](pics/trips-listing.png)
 
 ---
 
-## Table of contents
-* [Overview](#Overview)
-* [Technologies](#Technologies)
-* [Main components](#Main-components)
-* [Key features](#Key-features)
+## Spis treści
+* [Przegląd](#Przegląd)
+* [Technologie](#Technologie)
+* [Kluczowe komponenty](#Kluczowe-komponenty)
+* [Kluczowe funkcjonalności](#Kluczowe-funkcjonalności)
 * [Setup](#Setup)
-* [Development State](#Development-State)
-* [License](#License)
+* [Stan rozwoju aplikacji](#Stan-rozwoju-aplikacji)
+* [Licencja](#Licencja)
 
-## Overview
-[TravelAgencyWebApp](https://github.com/JakubNowobilski/TravelAgencyWebApp) has been created as part of my Introduction to Web Applications university course. It provides functionality of a simple Travel Agency. It allows browsing trips and making reservations. Admin features include adding new trips and setting authentication persistence. All project requirements assigned by the tutor are listed in [project requirements](project_requirements.txt).
+## Przegląd
+[TravelAgency](https://github.com/JakubNowobilski/TravelAgency) powstał jako część projektu zaliczeniowego z przedmiotu
+Wprowadzenie do Aplikacji Internetowych. Oryginalnie aplikacja korzystała z bazy danych w chmurze:
+Google [Firebase Realtime Database](https://firebase.google.com/docs/database). Na potrzeby przedmiotu
+Projektowanie Aplikacji Internetowych zrezygnowane z tego rozwiązania i wprowadzono bardziej standardowe rozwiązanie
+oparte o bazę dokumentową [MongoDB](https://www.mongodb.com/) oraz backend aplikacji zrealizowany w
+[NodeJS](https://nodejs.org/en).
+Aplikacja dostarcza funkcjonalność prostej agencji podróży. Pozwala na przeglądanie wycieczek oraz dokonywanie
+rezerwacji. Funkcjonalności administratora obejmują dodawanie nowych wycieczek oraz ustawienie tryb persystencji
+uwierzytelniania. Wszystkie oryginalne wymagania wobec aplikacji znajdują się w [wymaganiach projektu](project_requirements.txt).
 
 
-## Technologies
+## Technologie
 * [Angular 11.2.11](https://v11.angular.io/docs)
 * [AngularFire 6.1.4](https://github.com/angular/angularfire)
-* [Firebase Realtime Database](https://firebase.google.com/docs/database)
+* [MongoDB](https://www.mongodb.com/)
+* [NodeJS](https://nodejs.org/en)
 * [Firebase Authentication](https://firebase.google.com/docs/auth)
+* [Firebase Cloud Storage](https://firebase.google.com/docs/storage)
 
-## Main components
-### Trips listing
+## Kluczowe komponenty
+### Listing wycieczek
 ![tips-listing](pics/trips-listing.png)
    
-### Trip details
+### Szczegóły wycieczki
 ![trip-details](pics/trip-details.png)
 
-### Sign in
+### Ekran logowania
 ![sign-in](pics/sign-in.png)
 
-### Add new trip
+### Dodanie nowej wycieczki
 ![add-trip](pics/add-trip.png)
 
-### Basket
+### Koszyk
 ![basket](pics/basket.png)
 
-## Key features
-* **Data provider** - data is provided and stored with [Firebase Realtime Database](https://firebase.google.com/docs/database) which is also used for user authorisation. Images are stored with [Firebase Cloud Storage](https://firebase.google.com/docs/storage).
-* **Users and authentication** - Users are authenticated using [Firebase Authentication](https://firebase.google.com/docs/auth). There are 4 types of users:
-  * **Guest** (not logged in) - has the least privileges. Is allowed only to browse trips.
-  * **Reader** (logged in) - regular user. Is allowed to browse trips and make reservations. Anyone can register as this type of user.
-  * **Worker** (of travel agency) - is allowed to add new trips. They can be registered only manually.
-  * **Admin** - has all the privileges of worker, and additionally can remove trips and manage authentication persistence.
-* **Contextual views** - additional menus, buttons and other components only appear for certain types of users.
+## Kluczowe funkcjonalności
+* **Dostawca danych** - dane przechowywane są w dokumentowej bazie danych [MongoDB](https://www.mongodb.com/).
+Przechowuje ona dane dotyczące wycieczek oraz użytkowników i ich ról. Obrazy przechowywane są w usłudze
+[Firebase Cloud Storage](https://firebase.google.com/docs/storage).
+* **Użytkownicy oraz uwierzytelnianie** - Użytkownicy uwierzytelniani są za pomocą usługi
+[Firebase Authentication](https://firebase.google.com/docs/auth). Istnieją 4 rodzaje ról użytkownika:
+  * **Gość** (użytkownik niezalogowany) - posiada najmniej uprawnień. Może jedynie przeglądać wycieczki.
+  * **Czytelnik** (użytkownik zalogowany) - regularny użytkownik. Może przeglądać wycieczki oraz dokonywać rezerwacji.
+Każdy może zarejestrować się jako ten typ użytkownika.
+  * **Pracownik** (agencji podróży) - może dodawać nowe wycieczki. Wycieczki mogą być stworzone wyłącznie ręcznie.
+  * **Administrator** - posiada wszystkie uprawnienia jak Pracownik. Dodatkowo może usuwać wycieczki oraz zarządzać
+persystencją uwierzytelniania.
+* **Widoki kontekstowe** - dodatkowe panele menu, przyciski oraz inne komponenty widocznej jedynie dla odpowiednich
+typów użytkowników.
 
   | ![guest-navbar](pics/guest-navbar.png) |
-  |:---:|
-  | *Guest navbar* |
+  |:--------------------------------------:|
+  |        *Panel nawigacji Gościa*        |
 
   | ![guest-navbar](pics/admin-navbar.png) |
-  |:---:|
-  | *Admin navbar* |
+  |:--------------------------------------:|
+  |    *Panel nawigacji Administratora*    |
 
-* **Guards** - guards are set to protect certain components of application from unauthorised access. For example guests (not logged-in users) are not allowed to access basket page and if they try to access it directly from URL, they are redirected to page-not-found page.
+* **Strażnicy (Guards)** - strażnicy są skonfigurowani aby blokować dostęp do niektórych komponentów aplikacji
+przed nieautoryzowanymi użytkownikami. Przykładowo Goście (niezalogowani użytkownicy) nie mają dostępu do widoku koszyka,
+a jeśli spróbują przejść do strony koszyka poprzez wpisanie adresu URL koszyka zostaną przekierowani do strony
+<em>nieznaleziono</em>.
 
 ## Setup
-If you want to play with the app on your own, there are few steps to follow to make it run on your machine.
-1. Sign up for [Google Firebase](https://firebase.google.com/).
-2. Create new realtime database and upload [sample data](assets/sample-data.json).
-3. Set cloud storage and upload [sample images](assets/sample-pics).
-4. In Firebase Console go to project settings, find your SDK configuration and copy it to [environment.ts](../src/environments/environment.ts) and [environment.prod.ts](../src/environments/environment.prod.ts).
-5. Run **npm install**
-6. Run **ng serve**
-7. Open your app at [localhost:4200](http://localhost:4200/)
+Jeśli chcesz samodzielnie użytkować aplikację, jest kilka kroków, które musisz wykonać aby uruchomić ją na swoim
+urządzeniu.
+1. Zarejestruj się do [Google Firebase](https://firebase.google.com/).
+2. Skonfiguruj magazynowanie (cloud storage) i prześlij [przykładowe obrazy](assets/sample-pics).
+3. W konsoli Firebase przejdź do ustawień projektu, znajdź odpowiednią konfigurację SDK i skopiuj ją do
+[environment.ts](../src/environments/environment.ts) oraz [environment.prod.ts](../src/environments/environment.prod.ts).
+4. Uruchom serwer MongoDB na porcie 27017
+5. Przejdź do folderu [backend](../backend) i uruchom **npm install**
+6. Aby dodać dane demo ([sample data](assets/sample-data.json)) uruchom **node drop_update_demo.js**
+7. Uruchom serwer aplikacji za pomocą **node travel_agency_server.js**
+8. Przejdź do folderu [fronted](../frontend) i uruchom **npm install**
+9. Uruchom **ng serve**
+10. Otwórz aplikację w przeglądarce pod adresem [localhost:4200](http://localhost:4200/)
 
-Alternatively, if you are not interested in setting up Firebase, you can set other data provider (e.g. REST API) using this [sample data](assets).
+## Stan rozwoju aplikacji
 
-## Development State
+Praca nad projektem jest zakończona, ale poniżej przedstawionych jest kilka możliwość rozwoju aplikacji:
+* Filtrowanie oraz sortowanie wycieczek
+* Implementacja RWD (Responsive Web Design)
+* Implementacja indywidualnych koszyków użytkownika
+* Implementacja systemu ocen wycieczek  
+* Przesyłanie obrazów wycieczek
+* Stworzenie procesu rezerwacji wycieczek
 
-The work on the project is done, but here are some possible directions of development:
-* Trips filtering and sorting
-* Introduce RWD
-* Implement individual baskets
-* Implement trips rating system  
-* Allow image upload
-* Develop the process of making reservation
+## Licencja
 
-## License
-
-This project is licensed under the terms of the MIT [license](LICENSE.md).
+Projekt jest licencjonowany pod warunkami [licencji](LICENSE.md) MIT.
