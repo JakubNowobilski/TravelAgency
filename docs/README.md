@@ -83,7 +83,7 @@ a jeśli spróbują przejść do strony koszyka poprzez wpisanie adresu URL kosz
 ## Dokumentacja techniczna
 
 Aplikacja ma typową trójwarstwową architekturę. Składa się z bazy danych MongoDB, backendu zaimplementowanego w NodeJS
-oraz frontendu zaimplementowanego w Angularze. Komunikacje między frontendem a backendem jest zrealizowana za pomocą
+oraz frontendu zaimplementowanego w Angularze. Komunikacja między frontendem a backendem jest zrealizowana za pomocą
 REST API.
 
 ![system-architecture](pics/system-architecture.png)
